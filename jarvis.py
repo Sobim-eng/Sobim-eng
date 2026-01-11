@@ -48,6 +48,7 @@ def processCommand(cmd):
         webbrowser.open("https://www.instagram.com/")
 
     elif "screenshot" in cmd:
+        speak("Taking screenshot")
         take_screenshot()
 
     elif cmd.startswith("play"):
