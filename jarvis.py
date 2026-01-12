@@ -2,6 +2,7 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 import musicLibrary
+import os
 import time
 import pyautogui
 import google.generativeai as ai
@@ -14,11 +15,11 @@ engine.setProperty("rate", 180) # Faster, more natural speed
 def speak(text):
     print(f"Jarvis: {text}") # See it in console too
     engine.say(text)
-    engine.runAndWait()
 
 # Google AI Gemini setup
 # AI SETUP
-ai.configure(api_key="")
+import os
+ai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = ai.GenerativeModel('gemini-1.5-flash')
 
 def ask_jarvis(prompt):
