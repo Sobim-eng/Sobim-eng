@@ -1,27 +1,40 @@
-import pyautogui
+# commands.py
 import webbrowser
+import pyautogui
 import time
 
-def take_screenshot(speak):
-    timestamp = time.strftime("%Y%m%d-%H%M%S")
-    filename = f"screenshot_{timestamp}.png"
-    screenshot = pyautogui.screenshot()
-    screenshot.save(filename)
-    return filename
+pyautogui.FAILSAFE = True
 
 def open_browser(speak):
-    webbrowser.get().open_new_tab("about:blank")
+    speak("Opening browser")
+    webbrowser.open("https://www.google.com")
 
+def open_youtube(speak):
+    speak("Opening YouTube")
+    webbrowser.open("https://www.youtube.com")
+
+volume_step = 5
 def volume_up(speak):
-    pyautogui.press("volumeup")
-    speak("Volume increased")
+    for _ in range(volume_step):
+        pyautogui.press("volumeup")
 
 def volume_down(speak):
-    pyautogui.press("volumedown")
-    speak("Volume decreased")
+    for _ in range(volume_step):
+        pyautogui.press("volumedown")
 
-Commands = {
-    "open browser": open_browser,
-    "screenshot": take_screenshot,
-    "volume up": volume_up,
-    "volume down": volume_down}
+def mute_volume(speak):
+    pyautogui.press("volumemute")
+
+def take_screenshot_cmd(speak, screenshot_func):
+    speak("Taking screenshot")
+    screenshot_func()
+
+def register_commands(speak, screenshot_func):
+    return {
+        "open browser": lambda: open_browser(speak),
+        "open youtube": lambda: open_youtube(speak),
+        "volume up": lambda: volume_up(speak),
+        "volume down": lambda: volume_down(speak),
+        "mute": lambda: mute_volume(speak),
+        "screenshot": lambda: take_screenshot_cmd(speak, screenshot_func),
+    }
