@@ -70,11 +70,11 @@ while True:
                     print(f"You said: {user_command}")
                     process_command(user_command)
                 except sr.WaitTimeoutError:
-                    speak("No command heard.")
+                    speak("Are you still there? I am still listening.")
                 except sr.UnknownValueError:
                     speak("I didn't catch that.")
 
-        elif "exit" in command or "quit" in command:
+        elif "exit" in command:
             speak("Shutting down. Goodbye!")
             break
 
