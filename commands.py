@@ -6,6 +6,8 @@ import speech_recognition as sr
 
 pyautogui.FAILSAFE = True
 volume_step = 5
+r = sr.Recognizer()
+
 def open_browser(speak):
     speak("Opening browser")
     webbrowser.open("https://www.google.com")
@@ -30,13 +32,22 @@ def take_screenshot_cmd(speak, screenshot_func):
     screenshot_func()
 
 def close_app(speak):  
-    speak("Are you sure? Type yes/no in terminal")
-    answer = input("You: ").strip().lower()
-    if answer in ["yes", "y", "sure", "yeah", "ok"]:
-        speak("Closing")
-        pyautogui.hotkey("alt", "f4")
-    else:
-        speak("Cancelled")
+    speak("Are you sure? ")
+    with sr.Microphone() as source:
+        try:
+            audio = r.listen(source, timeout=5, phrase_time_limit=5)
+            user_command = r.recognize_google(audio)
+            if "yes" in user_command.lower():
+                speak("Closing the application")
+                pyautogui.hotkey("alt", "f4")
+            else:
+                speak("Close application command cancelled.")
+        except sr.UnknownValueError:
+            speak("I didn't catch that.")
+            
+    
+    pyautogui.hotkey("alt", "f4")
+        
         
 def register_commands(speak, screenshot_func):
     return {

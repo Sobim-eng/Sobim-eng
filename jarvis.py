@@ -65,7 +65,7 @@ while True:
             speak("Yes?")
             with sr.Microphone() as source:
                 try:
-                    audio = r.listen(source, timeout=5, phrase_time_limit=5)
+                    audio = r.listen(source, timeout=5, phrase_time_limit=10)
                     user_command = r.recognize_google(audio)
                     print(f"You said: {user_command}")
                     process_command(user_command)
