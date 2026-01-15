@@ -38,7 +38,6 @@ def take_screenshot():
 
 # Register commands ONCE
 COMMANDS = register_commands(speak, take_screenshot)
-
 def process_command(user_command):
     user_command = user_command.lower()
 
@@ -48,6 +47,13 @@ def process_command(user_command):
             return
 
     speak(ask_jarvis(user_command))
+
+#Listen command
+def listen_command(timeout=5, limit=7):
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source, duration=0.3)
+        audio = r.listen(source, timeout=timeout, phrase_time_limit=limit)
+        return r.recognize_google(audio).lower()
 
 # Main loop
 speak("Jarvis is online and ready.")

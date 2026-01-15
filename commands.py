@@ -27,27 +27,25 @@ def volume_down(speak):
 def mute_volume(speak):
     pyautogui.press("volumemute")
 
+volume_Settings = {
+    "volume up": volume_up;
+    "volume down": volume_down;
+}
 def take_screenshot_cmd(speak, screenshot_func):
     speak("Taking screenshot")
     screenshot_func()
 
-def close_app(speak):  
-    speak("Are you sure? ")
-    with sr.Microphone() as source:
-        try:
-            audio = r.listen(source, timeout=5, phrase_time_limit=5)
-            user_command = r.recognize_google(audio)
-            if "yes" in user_command.lower():
-                speak("Closing the application")
-                pyautogui.hotkey("alt", "f4")
-            else:
-                speak("Close application command cancelled.")
-        except sr.UnknownValueError:
-            speak("I didn't catch that.")
-            
+def close_app(speak):
+    confiramtion = speak("You sure? ")
+    try:
+        if "yes" in confiramtion:
+            speak("Closing Application")
+            pyautogui.hotkey("alt", 'f4')
+        else:
+            speak("Cancelling closing")
     
-    pyautogui.hotkey("alt", "f4")
-        
+    except Exception as e:
+        print (e)
         
 def register_commands(speak, screenshot_func):
     return {
