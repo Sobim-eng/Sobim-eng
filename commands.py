@@ -28,8 +28,9 @@ def mute_volume(speak):
     pyautogui.press("volumemute")
 
 volume_Settings = {
-    "volume up": volume_up;
-    "volume down": volume_down;
+    "volume up": volume_up,
+    "volume down": volume_down,
+    "Silence": mute_volume
 }
 def take_screenshot_cmd(speak, screenshot_func):
     speak("Taking screenshot")
@@ -46,7 +47,11 @@ def close_app(speak):
     
     except Exception as e:
         print (e)
-        
+
+def minimize_screen(speak):
+    speak("Minimizing Screen")
+    pyautogui.hotkey("win", "d")
+      
 def register_commands(speak, screenshot_func):
     return {
         "open browser" or "start browser": lambda: open_browser(speak),
@@ -55,5 +60,6 @@ def register_commands(speak, screenshot_func):
         "volume down": lambda: volume_down(speak),
         "mute": lambda: mute_volume(speak),
         "screenshot": lambda: take_screenshot_cmd(speak, screenshot_func),
-        "close app" or "close application": lambda: close_app(speak)
+        "close app" or "close application": lambda: close_app(speak),
+        "minimize": lambda: minimize_screen(speak)
     }
