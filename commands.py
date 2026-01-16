@@ -55,7 +55,10 @@ def minimize_screen(speak):
 def setting(speak):
     speak("Opening Settings")
     pyautogui.hotkey("win", "i")
-    
+
+def opened_window(speak):
+    speak("Working on that")
+    pyautogui.hotkey("win", "tab")
 def register_commands(speak, screenshot_func):
     return {
         "open browser" or "start browser": lambda: open_browser(speak),
