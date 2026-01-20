@@ -2,10 +2,12 @@ import speech_recognition as sr
 import pyttsx3
 import os
 import time
+import random
 import pyautogui
 import google.generativeai as ai
 from commands import register_commands
 from commands import Windows_Commands
+from commands import response
 # Initial setup
 r = sr.Recognizer()
 engine = pyttsx3.init("sapi5")
@@ -47,8 +49,7 @@ def process_command(user_command):
             return
 
     speak(ask_jarvis(user_command))
-#Windows Commands:
-Win = Windows_Commands(speak) 
+
 #Listen command
 def listen_command(timeout=5, limit=7):
     with sr.Microphone() as source:
@@ -75,6 +76,7 @@ while True:
                     audio = r.listen(source, timeout=5, phrase_time_limit=10)
                     user_command = r.recognize_google(audio)
                     print(f"You said: {user_command}")
+                    speak(random.choice(response))
                     process_command(user_command)
                 except sr.WaitTimeoutError:
                     speak("Are you still there? I am still listening.")
