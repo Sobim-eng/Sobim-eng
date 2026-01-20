@@ -8,6 +8,13 @@ pyautogui.FAILSAFE = True
 volume_step = 5
 r = sr.Recognizer()
 
+response = {
+    "OK",
+    "Right away",
+    "Working"
+    "Working on it"
+}
+
 def open_browser(speak):
     speak("Opening browser")
     webbrowser.open("https://www.google.com")
@@ -59,6 +66,11 @@ def setting(speak):
 def opened_window(speak):
     speak("Working on that")
     pyautogui.hotkey("win", "tab")
+
+def search(speak):
+    speak("Opening Search: ")
+    pyautogui.hotkey("win", "s")
+
 def register_commands(speak, screenshot_func):
     return {
         "open browser" or "start browser": lambda: open_browser(speak),
@@ -68,5 +80,7 @@ def register_commands(speak, screenshot_func):
         "mute": lambda: mute_volume(speak),
         "screenshot": lambda: take_screenshot_cmd(speak, screenshot_func),
         "close app" or "close application": lambda: close_app(speak),
-        "minimize": lambda: minimize_screen(speak)
+        "minimize": lambda: minimize_screen(speak),
+        "windows": lambda: opened_window(speak)
     }
+

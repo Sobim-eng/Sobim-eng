@@ -5,7 +5,7 @@ import time
 import pyautogui
 import google.generativeai as ai
 from commands import register_commands
-
+from commands import Windows_Commands
 # Initial setup
 r = sr.Recognizer()
 engine = pyttsx3.init("sapi5")
@@ -47,7 +47,8 @@ def process_command(user_command):
             return
 
     speak(ask_jarvis(user_command))
-
+#Windows Commands:
+Win = Windows_Commands(speak) 
 #Listen command
 def listen_command(timeout=5, limit=7):
     with sr.Microphone() as source:
