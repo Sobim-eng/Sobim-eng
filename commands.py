@@ -21,6 +21,7 @@ def open_browser(speak):
     webbrowser.open("https://www.google.com")
 
 def open_youtube(speak):
+    speak(random(response))
     speak("Opening YouTube")
     webbrowser.open("https://www.youtube.com")
 
