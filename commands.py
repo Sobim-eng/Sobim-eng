@@ -1,7 +1,7 @@
 # commands.py
 import webbrowser
 import pyautogui
-import time
+import random
 import speech_recognition as sr
 
 pyautogui.FAILSAFE = True
@@ -16,7 +16,8 @@ response = {
 }
 
 def open_browser(speak):
-    speak("Opening browser")
+    speak(random(response))
+    speak("Opening Browser")
     webbrowser.open("https://www.google.com")
 
 def open_youtube(speak):
